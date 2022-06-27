@@ -1,0 +1,68 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'jacoco'
+}
+
+group = 'com.we.admin'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+}
+
+// remove -plain-version. jar from the build
+jar {
+	enabled = false
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+	implementation 'com.networknt:json-schema-validator:1.0.70'
+
+	implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.9.1'
+
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.5'
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.12.5'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation ('org.springframework.boot:spring-boot-starter-test')
+	//testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		showStandardStreams = true
+		events "standardOut", "started", "passed", "skipped", "failed"
+	}
+	finalizedBy jacocoTestReport
+}
+
+jacoco {
+	toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.enabled true
+		html.enabled true
+		csv.enabled true
+	}
+	afterEvaluate {
+		classDirectories.from = files(classDirectories.files.collect {
+			fileTree(
+					dir: it,
+					exclude: ['com/ks/example/config/**'])
+		})
+	}
+}

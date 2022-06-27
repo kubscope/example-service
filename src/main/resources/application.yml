@@ -1,0 +1,21 @@
+
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    com.we.admin: ${APP_LOG_LEVEL:DEBUG}
+
+spring:
+  application:
+    name: example-service
+    env: ${APP_ENV:local}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

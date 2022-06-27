@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "title": "Application Users ",
+  "description": "User Details",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "user id"
+    },
+    "name": {
+      "type": "string",
+      "description": "user name"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "True by default required"
+    }
+  },
+  "required": ["name", "id", "active"]
+}
