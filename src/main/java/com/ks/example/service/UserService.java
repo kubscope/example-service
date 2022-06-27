@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public static final String ID = "id";
-
     private ArrayNode users;
     private ObjectMapper objectMapper;
 
@@ -32,7 +31,6 @@ public class UserService {
     }
 
     public User getById(Long id) {
-
 
         for (int i = 0; i < users.size(); ++i) {
             JsonNode node = users.get(i);

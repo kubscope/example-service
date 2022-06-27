@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * This class validates core application schemas,
- * Schema will be loaded from class path and validated aginest to the payload
+ * Schema will be loaded from class path and validated against to the payload
  * if payload is not compile with schema it will be returning Http 404 status
  */
 @Slf4j
@@ -31,9 +31,7 @@ public class SchemaValidator {
             JsonSchema schema = schemaFactory.getSchema(stream);
             Set<ValidationMessage> validationResult = schema.validate(node);
 
-            log.debug("schema ");
-            log.debug(schema.toString());
-
+            log.debug("schema  name {}  JSON \n{} ", schemaName, schema.toString());
             if (!validationResult.isEmpty()) {
                 log.error("unable process the request , required fields are missing {} ", validationResult.toString());
                 throw new InvalidException("required fields are missing", validationResult);

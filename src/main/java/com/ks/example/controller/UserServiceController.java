@@ -17,7 +17,6 @@ public class UserServiceController {
     @Autowired
     private UserService service;
 
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ArrayNode users() {
