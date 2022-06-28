@@ -57,3 +57,7 @@ curl --location --request DELETE 'http://localhost:8080/api/v1/users/13' \
 --header 'Content-Type: application/json'
 
 ```
+
+## Kubernetes Deployment
+# deploys service and deployment 
+kubectl apply -f kube/example-srv-deployment.yml

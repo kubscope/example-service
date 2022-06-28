@@ -44,3 +44,24 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        if: steps.var.outputs.branch == 'main'
+
+      - name: Login to DockerHub
+        uses: docker/login-action@
+        if: steps.var.outputs.branch == 'main'
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        if: steps.var.outputs.branch == 'main'
+        with:
+          context:  src/docker/Dockerfile
+          push: true
+          tags: kubescope/example-service:latest
