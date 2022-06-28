@@ -17,8 +17,33 @@ spec:
         - name: example-service
           image: kubescope/example-service
           ports:
-            - containerPort: 8080
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 1
           resources: {}
+          env:
+            - name: PORT
+              value: "8080"
+            - name: APP_ENV
+              value: "DEV"
+            - name: APP_LOG_LEVEL
+              value: DEBUG
 
 ---
 apiVersion: v1
