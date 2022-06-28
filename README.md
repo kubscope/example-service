@@ -54,13 +54,11 @@ curl --location --request PUT 'http://localhost:8080/api/v1/users' \
 #To delete  
 curl --location --request DELETE 'http://localhost:8080/api/v1/users/13' \
 --header 'Content-Type: application/json'
-
 ```
 
 ## Kubernetes Deployment
 Image will be pulled from docker registry https://hub.docker.com/r/kubescope/example-service
-
-```
+```shell
 # deploys service and deployment 
 kubectl apply -f kube/example-srv-deployment.yml
 ```
