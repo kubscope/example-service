@@ -3,7 +3,7 @@ Sample service to test REST application. It exposes REST endpoints for testing.
 
 
 ### Build
-```
+```shell
 # Build application 
 ./gradlew clean build 
 
@@ -12,21 +12,20 @@ Sample service to test REST application. It exposes REST endpoints for testing.
     
     (or)
 java -jar build/libs/example-service-0.0.1-SNAPSHOT.jar
-
 ```
 
 ### Build docker image  
-```
+```shell
 docker build -t kubescope/example-service -f src/docker/Dockerfile  .
-
 ```
 
 ## To Run 
+```shell
 docker run -i -p 8080:8080 kubescope/example-service
-
+```
 
 ## REST Operations
-```
+```shell
 #To get all user  
 curl --location --request GET 'http://localhost:8080/api/v1/users'
 
