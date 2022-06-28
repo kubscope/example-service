@@ -62,6 +62,7 @@ jobs:
         uses: docker/build-push-action@v3
         if: steps.var.outputs.branch == 'main'
         with:
-          context: src/docker/Dockerfile
+          context: .
+          file: ./src/docker/Dockerfile
           push: true
           tags: kubescope/example-service:latest
